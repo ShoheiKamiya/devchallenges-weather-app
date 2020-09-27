@@ -11,6 +11,7 @@
     "axios": "^0.20.0",
     "camelcase-keys": "^6.2.2",
     "core-js": "^3.6.5",
+    "dayjs": "^1.8.36",
     "destyle.css": "^1.0.15",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
