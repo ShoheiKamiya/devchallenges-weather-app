@@ -1,5 +1,4 @@
 <template>
-  <div id="nav"><router-link to="/">Home</router-link> |</div>
   <router-view />
 </template>
 
@@ -10,5 +9,6 @@
 #app {
   font-family: "Raleway", sans-serif;
   color: $color-text;
+  font-size: 16px;
 }
 </style>
