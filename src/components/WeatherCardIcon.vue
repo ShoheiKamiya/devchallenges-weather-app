@@ -19,6 +19,10 @@ type Abbreviation =
   | "lc"
   | "c";
 
+type WeatherMember = {
+  [P in Abbreviation]: string;
+};
+
 export default defineComponent({
   props: {
     weatherStateAbbr: {
@@ -28,7 +32,7 @@ export default defineComponent({
   },
   computed: {
     iconPath(): string {
-      const abbrToFileName = {
+      const abbrToFileName: WeatherMember = {
         sn: "Snow",
         sl: "Sleet",
         h: "Hail",
