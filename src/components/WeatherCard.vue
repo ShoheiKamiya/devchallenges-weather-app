@@ -2,7 +2,7 @@
   <div class="weather_card">
     <div>
       <p class="weather_card__date">
-        {{ weather.applicableDate }}
+        {{ date }}
       </p>
       <WeatherCardIcon :weatherStateAbbr="abbr" />
     </div>
@@ -17,6 +17,10 @@
 import WeatherCardIcon from "@/components/WeatherCardIcon.vue";
 import { defineComponent, PropType } from "vue";
 import { Weather } from "../../models/Weather";
+import dayjs from "dayjs";
+import isTomorrow from "dayjs/plugin/isTomorrow";
+
+dayjs.extend(isTomorrow);
 
 export default defineComponent({
   components: {
@@ -37,6 +41,14 @@ export default defineComponent({
     },
     abbr(): string {
       return this.weather.weatherStateAbbr;
+    },
+    date(): string {
+      const d = dayjs(this.weather.applicableDate);
+      if (d.isTomorrow()) {
+        return "Tomorrow";
+      }
+
+      return d.format("ddd, D, MMM");
     }
   }
 });
@@ -57,6 +69,7 @@ export default defineComponent({
 
   &__date {
     margin-bottom: 10px;
+    white-space: nowrap;
   }
 
   &__icon {
