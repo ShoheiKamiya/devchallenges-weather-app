@@ -11,7 +11,7 @@
         <p>100</p>
       </div>
       <div class="humidity-card__indicator--bar">
-        <div class="humidity-card__indicator--bar-inner" />
+        <div class="humidity-card__indicator--bar-inner" :style="styleObject" />
       </div>
       <div class="humidity-card__indicator--percentage">%</div>
     </div>
@@ -29,6 +29,13 @@ export default {
     humidity: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    styleObject() {
+      return {
+        width: `${this.humidity}%`
+      };
     }
   }
 };
