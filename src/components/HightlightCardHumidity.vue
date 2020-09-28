@@ -54,6 +54,7 @@ export default {
     margin: 0 auto;
     color: #a09fb1;
     &--scale-wrapper {
+      font-size: 12px;
       display: flex;
       justify-content: space-between;
       margin-bottom: 2px;
