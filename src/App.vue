@@ -53,6 +53,8 @@ export default {
 
   .main {
     height: 100vh;
+    width: 100%;
+    max-width: 981px;
     padding: 42px 123px 50px 154px;
   }
 }

@@ -1,12 +1,12 @@
 <template>
   <div>
-    <template v-if="!isLoading">
+    <div class="weather_cards" v-if="!isLoading">
       <WeatherCard
         v-for="weather in weatherList5days"
         :key="weather.id"
         :weather="weather"
       />
-    </template>
+    </div>
   </div>
 </template>
 
@@ -32,3 +32,10 @@ export default defineComponent({
   }
 });
 </script>
+
+<style lang="scss">
+.weather_cards {
+  display: flex;
+  justify-content: space-between;
+}
+</style>
