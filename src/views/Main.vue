@@ -7,6 +7,7 @@
         :weather="weather"
       />
     </div>
+    <HightlightCardHumidity :humidity="todayHumidity" />
   </div>
 </template>
 
@@ -14,6 +15,7 @@
 import { defineComponent, PropType } from "vue";
 import { Weather } from "../../models/Weather";
 import WeatherCard from "../components/WeatherCard.vue";
+import HightlightCardHumidity from "@/components/HightlightCardHumidity.vue";
 
 export default defineComponent({
   props: {
@@ -23,11 +25,15 @@ export default defineComponent({
     }
   },
   components: {
-    WeatherCard
+    WeatherCard,
+    HightlightCardHumidity
   },
   computed: {
     weatherList5days(): Weather[] {
       return [...this.weatherList].splice(1, 5);
+    },
+    todayHumidity(): number {
+      return this.weatherList[0].humidity;
     }
   }
 });
@@ -37,5 +43,6 @@ export default defineComponent({
 .weather_cards {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 72px;
 }
 </style>
