@@ -1,7 +1,9 @@
 <template>
   <div class="root">
-    <nav class="nav">nav</nav>
-    <Main class="main" :weatherList="weatherList" />
+    <template v-if="!isLoading">
+      <nav class="nav">nav</nav>
+      <Main class="main" :weatherList="weatherList" />
+    </template>
   </div>
 </template>
 
@@ -9,8 +11,9 @@
 import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/fetchWeather";
 import { Weather } from "../models/Weather";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     Main
   },
@@ -27,11 +30,11 @@ export default {
       this.isLoading = false;
     });
   }
-};
+});
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
 @import "@/assets/variables.scss";
 
 #app {
