@@ -27,8 +27,8 @@ export default defineComponent({
     };
   },
   mounted() {
-    // TODO: いったん固定値にしておく
-    fetchWeather("2487956").then(res => {
+    // TODO: いったん固定値(東京)にしておく
+    fetchWeather("1118370").then(res => {
       this.weathers = res.data.consolidatedWeather;
       this.isLoading = false;
     });
