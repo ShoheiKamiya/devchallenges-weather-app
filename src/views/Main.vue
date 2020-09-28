@@ -2,7 +2,7 @@
   <div>
     <template v-if="!isLoading">
       <WeatherCard
-        v-for="weather in weathers"
+        v-for="weather in weatherList5days"
         :key="weather.id"
         :weather="weather"
       />
@@ -11,27 +11,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { fetchWeather } from "../api/fetchWeather";
-import WeatherCard from "../components/WeatherCard.vue";
+import { defineComponent, PropType } from "vue";
 import { Weather } from "../../models/Weather";
+import WeatherCard from "../components/WeatherCard.vue";
 
 export default defineComponent({
+  props: {
+    weatherList: {
+      type: Array as PropType<Weather[]>,
+      required: true
+    }
+  },
   components: {
     WeatherCard
   },
-  data() {
-    return {
-      isLoading: true,
-      weathers: [] as Weather[]
-    };
-  },
-  mounted() {
-    // TODO: いったん固定値(東京)にしておく
-    fetchWeather("1118370").then(res => {
-      this.weathers = res.data.consolidatedWeather;
-      this.isLoading = false;
-    });
+  computed: {
+    weatherList5days(): Weather[] {
+      return [...this.weatherList].splice(1, 5);
+    }
   }
 });
 </script>

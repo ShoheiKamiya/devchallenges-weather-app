@@ -1,16 +1,31 @@
 <template>
   <div class="root">
     <nav class="nav">nav</nav>
-    <Main class="main" />
+    <Main class="main" :weatherList="weatherList" />
   </div>
 </template>
 
 <script lang="ts">
 import Main from "@/views/Main.vue";
+import { fetchWeather } from "@/api/fetchWeather";
+import { Weather } from "../models/Weather";
 
 export default {
   components: {
     Main
+  },
+  data() {
+    return {
+      isLoading: true,
+      weatherList: [] as Weather[]
+    };
+  },
+  mounted() {
+    // TODO: いったん固定値(東京)にしておく
+    fetchWeather("1118370").then(res => {
+      this.weatherList = res.data.consolidatedWeather;
+      this.isLoading = false;
+    });
   }
 };
 </script>
@@ -24,6 +39,7 @@ export default {
   color: $color-text;
   background: $color-background;
   font-size: 16px;
+  height: 100vh;
 }
 
 .root {
@@ -31,10 +47,12 @@ export default {
 
   .nav {
     width: 459px;
+    height: 100vh;
     background: $color-base;
   }
 
   .main {
+    height: 100vh;
     padding: 42px 123px 50px 154px;
   }
 }
