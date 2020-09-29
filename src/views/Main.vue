@@ -7,7 +7,10 @@
         :weather="weather"
       />
     </div>
-    <HightlightCardHumidity :humidity="todayHumidity" />
+    <div class="hightlight-card-wrapper">
+      <HightlightCardWind :wind="todayWind" />
+      <HightlightCardHumidity :humidity="todayHumidity" />
+    </div>
   </div>
 </template>
 
@@ -16,6 +19,13 @@ import { defineComponent, PropType } from "vue";
 import { Weather } from "../../models/Weather";
 import WeatherCard from "../components/WeatherCard.vue";
 import HightlightCardHumidity from "@/components/HightlightCardHumidity.vue";
+import HightlightCardWind from "@/components/HightlightCardWind.vue";
+
+type Wind = {
+  speed: number;
+  direction: number;
+  directionCompass: string;
+};
 
 export default defineComponent({
   props: {
@@ -26,14 +36,25 @@ export default defineComponent({
   },
   components: {
     WeatherCard,
-    HightlightCardHumidity
+    HightlightCardHumidity,
+    HightlightCardWind
   },
   computed: {
     weatherList5days(): Weather[] {
       return [...this.weatherList].splice(1, 5);
     },
+    today(): Weather {
+      return this.weatherList[0];
+    },
     todayHumidity(): number {
-      return this.weatherList[0].humidity;
+      return this.today.humidity;
+    },
+    todayWind(): object {
+      return {
+        speed: this.today.windSpeed,
+        direction: this.today.windDirection,
+        directionCompass: this.today.windDirectionCompass
+      };
     }
   }
 });
@@ -44,5 +65,10 @@ export default defineComponent({
   display: flex;
   justify-content: space-between;
   margin-bottom: 72px;
+}
+
+.hightlight-card-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
