@@ -12,6 +12,7 @@ import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/fetchWeather";
 import { Weather } from "../models/Weather";
 import { defineComponent } from "vue";
+import { data } from "@/api/data";
 
 export default defineComponent({
   components: {
@@ -21,6 +22,7 @@ export default defineComponent({
     return {
       isLoading: true,
       weatherList: [] as Weather[]
+      // weatherList: data.consolidatedWeather as Weather[]
     };
   },
   mounted() {
