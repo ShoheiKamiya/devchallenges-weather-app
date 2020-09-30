@@ -12,7 +12,7 @@ import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/fetchWeather";
 import { Weather } from "../models/Weather";
 import { defineComponent } from "vue";
-import { data } from "@/api/data";
+// import { data } from "@/api/data";
 
 export default defineComponent({
   components: {

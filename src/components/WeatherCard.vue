@@ -1,14 +1,14 @@
 <template>
   <div class="weather_card">
     <div>
-      <p class="weather_card__date">
+      <p class="date">
         {{ date }}
       </p>
       <WeatherCardIcon :weatherStateAbbr="abbr" />
     </div>
-    <div class="weather_card__temp_wrapper">
-      <div class="weather_card__temp_wrapper--max">{{ maxTemp }}℃</div>
-      <div class="weather_card__temp_wrapper--min">{{ minTemp }}℃</div>
+    <div class="temp_wrapper">
+      <div class="temp_wrapper--max">{{ maxTemp }}℃</div>
+      <div class="temp_wrapper--min">{{ minTemp }}℃</div>
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "@/assets/variables.scss";
 
 .weather_card {
@@ -67,20 +67,15 @@ export default defineComponent({
   justify-content: space-between;
   text-align: center;
 
-  &__date {
+  .date {
     margin-bottom: 10px;
     white-space: nowrap;
   }
 
-  &__icon {
-    width: 55px;
-    margin: 0 auto;
-  }
-
-  &__temp_wrapper {
+  .temp_wrapper {
     display: flex;
     justify-content: space-between;
-    &--min {
+    .temp_wrapper--min {
       color: #a09fb1;
     }
   }

@@ -1,19 +1,17 @@
 <template>
   <HighlightCard class="humidity-card">
-    <p class="humidity-card__title">Humidity</p>
-    <p class="humidity-card__data">
-      {{ humidity }}<span class="humidity-card__data--unit">%</span>
-    </p>
-    <div class="humidity-card__indicator">
-      <div class="humidity-card__indicator--scale-wrapper">
+    <p class="title">Humidity</p>
+    <p class="data">{{ humidity }}<span class="unit">%</span></p>
+    <div class="indicator">
+      <div class="scale-wrapper">
         <p>0</p>
         <p>50</p>
         <p>100</p>
       </div>
-      <div class="humidity-card__indicator--bar">
-        <div class="humidity-card__indicator--bar-inner" :style="styleObject" />
+      <div class="bar">
+        <div class="bar-inner" :style="styleObject" />
       </div>
-      <div class="humidity-card__indicator--percentage">%</div>
+      <div class="percentage">%</div>
     </div>
   </HighlightCard>
 </template>
@@ -41,45 +39,45 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .humidity-card {
-  &__title {
+  .title {
     margin-bottom: 11px;
   }
-  &__data {
+  .data {
     font-size: 64px;
     font-weight: bold;
     margin-bottom: 12px;
-    &--unit {
+    .unit {
       font-size: 40px;
       font-weight: 200;
       margin-left: 5px;
     }
   }
-  &__indicator {
+  .indicator {
     width: 229px;
     margin: 0 auto;
     color: #a09fb1;
-    &--scale-wrapper {
+    .scale-wrapper {
       font-size: 12px;
       display: flex;
       justify-content: space-between;
       margin-bottom: 2px;
     }
-    &--bar {
+    .bar {
       width: 100%;
       height: 8px;
       background: #fff;
       margin: 0 auto 4px;
       border-radius: 4px;
-      &-inner {
+      .bar-inner {
         width: 84%;
         height: 8px;
         border-radius: 4px;
         background: #ffec65;
       }
     }
-    &--percentage {
+    .percentage {
       text-align: right;
     }
   }

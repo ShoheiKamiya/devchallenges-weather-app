@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <img class="weather_card__icon" :src="iconPath" />
-  </div>
+  <img class="icon" :src="iconPath" />
 </template>
 
 <script lang="ts">
@@ -44,8 +42,19 @@ export default defineComponent({
         lc: "LightCloud",
         c: "Clear"
       };
+      // TODO: 動的requireは危険なので、多少冗長になっても直す
+      // https://github.com/benmosher/eslint-plugin-import/blob/master/docs/rules/no-dynamic-require.md
       return require(`../assets/${abbrToFileName[this.weatherStateAbbr]}.png`);
     }
   }
 });
 </script>
+
+<style scoped lang="scss">
+@import "@/assets/variables.scss";
+
+.icon {
+  width: 55px;
+  margin: 0 auto;
+}
+</style>
