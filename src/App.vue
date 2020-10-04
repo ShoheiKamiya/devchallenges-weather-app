@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Main from "@/views/Main.vue";
-import { fetchWeather } from "@/api/fetchWeather";
+import { fetchWeather } from "@/api/metaWeather";
 import { Weather } from "../models/Weather";
 import { defineComponent } from "vue";
 import WeatherToday from "@/components/WeatherToday.vue";
