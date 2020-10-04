@@ -1,7 +1,9 @@
 <template>
   <div class="root">
     <template v-if="!isLoading">
-      <nav class="nav">nav</nav>
+      <nav class="nav">
+        <WeatherToday :title="title" :weather="weatherToday" />
+      </nav>
       <Main class="main" :weatherList="weatherList" />
     </template>
   </div>
@@ -12,16 +14,18 @@ import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/fetchWeather";
 import { Weather } from "../models/Weather";
 import { defineComponent } from "vue";
-// import { data } from "@/api/data";
+import WeatherToday from "@/components/WeatherToday.vue";
 
 export default defineComponent({
   components: {
-    Main
+    Main,
+    WeatherToday
   },
   data() {
     return {
       isLoading: true,
-      weatherList: [] as Weather[]
+      weatherList: [] as Weather[],
+      title: ""
       // weatherList: data.consolidatedWeather as Weather[]
     };
   },
@@ -29,8 +33,14 @@ export default defineComponent({
     // TODO: いったん固定値(東京)にしておく
     fetchWeather("1118370").then(res => {
       this.weatherList = res.data.consolidatedWeather;
+      this.title = res.data.title;
       this.isLoading = false;
     });
+  },
+  computed: {
+    weatherToday(): Weather {
+      return this.weatherList[0];
+    }
   }
 });
 </script>

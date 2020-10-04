@@ -4,7 +4,7 @@
       <p class="date">
         {{ date }}
       </p>
-      <WeatherCardIcon :weatherStateAbbr="abbr" />
+      <WeatherCardIcon class="weather_card__icon" :weatherStateAbbr="abbr" />
     </div>
     <div class="temp_wrapper">
       <div class="temp_wrapper--max">{{ maxTemp }}℃</div>
@@ -54,7 +54,7 @@ export default defineComponent({
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import "@/assets/variables.scss";
 
 .weather_card {
