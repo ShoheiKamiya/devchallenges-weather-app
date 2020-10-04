@@ -15,6 +15,7 @@
     "destyle.css": "^1.0.15",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
+    "throttle-debounce": "^2.3.0",
     "vue": "^3.0.0-0",
     "vue-router": "^4.0.0-0"
   },
