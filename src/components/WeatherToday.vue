@@ -1,7 +1,7 @@
 <template>
   <div class="weahter-today">
     <div class="header">
-      <button class="search-button">Search for places</button>
+      <button class="search-button" @click="search">Search for places</button>
       <span class="material-icons my-location-icon">my_location</span>
     </div>
     <WeatherCardIcon :weatherStateAbbr="abbr" class="weather-icon" />
@@ -39,6 +39,11 @@ export default defineComponent({
     title: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    search() {
+      this.$emit("search");
     }
   },
   computed: {

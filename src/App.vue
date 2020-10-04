@@ -2,7 +2,13 @@
   <div class="root">
     <template v-if="!isLoading">
       <nav class="nav">
-        <WeatherToday :title="title" :weather="weatherToday" />
+        <WeatherToday
+          :title="title"
+          :weather="weatherToday"
+          v-show="!isSearching"
+          @search="openSearch"
+        />
+        <SearchCard v-show="isSearching" @close="this.closeSearch" />
       </nav>
       <Main class="main" :weatherList="weatherList" />
     </template>
@@ -15,15 +21,18 @@ import { fetchWeather } from "@/api/fetchWeather";
 import { Weather } from "../models/Weather";
 import { defineComponent } from "vue";
 import WeatherToday from "@/components/WeatherToday.vue";
+import SearchCard from "@/components/SearchCard.vue";
 
 export default defineComponent({
   components: {
     Main,
-    WeatherToday
+    WeatherToday,
+    SearchCard
   },
   data() {
     return {
       isLoading: true,
+      isSearching: false,
       weatherList: [] as Weather[],
       title: ""
       // weatherList: data.consolidatedWeather as Weather[]
@@ -40,6 +49,14 @@ export default defineComponent({
   computed: {
     weatherToday(): Weather {
       return this.weatherList[0];
+    }
+  },
+  methods: {
+    openSearch(): void {
+      this.isSearching = true;
+    },
+    closeSearch(): void {
+      this.isSearching = false;
     }
   }
 });
