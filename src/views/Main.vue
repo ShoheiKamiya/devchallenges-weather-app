@@ -41,15 +41,17 @@ export default defineComponent({
   },
   computed: {
     weatherList5days(): Weather[] {
-      return [...this.weatherList].splice(1, 5);
+      return this.weatherList.slice(0, 5);
     },
     today(): Weather {
+      // FYI: TS4.1では、コンパイルオプションによってはこのコードは通らないはず
+      // https://github.com/microsoft/TypeScript/issues/13778
       return this.weatherList[0];
     },
     todayHumidity(): number {
       return this.today.humidity;
     },
-    todayWind(): object {
+    todayWind(): Wind {
       return {
         speed: this.today.windSpeed,
         direction: this.today.windDirection,
@@ -60,7 +62,7 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .weather_cards {
   display: flex;
   justify-content: space-between;

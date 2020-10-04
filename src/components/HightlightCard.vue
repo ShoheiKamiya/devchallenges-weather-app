@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "@/assets/variables.scss";
 
 .hightlight-card {

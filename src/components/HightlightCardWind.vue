@@ -37,12 +37,12 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 .hightlight-card {
-  > .title {
+  .title {
     margin-bottom: 11px;
   }
-  > .data {
+  .data {
     font-size: 64px;
     font-weight: bold;
     margin-bottom: 12px;
@@ -53,7 +53,7 @@ export default defineComponent({
     }
   }
   .direction {
-    > .icon {
+    .icon {
       display: inline-block;
       text-align: center;
       line-height: 30px;
