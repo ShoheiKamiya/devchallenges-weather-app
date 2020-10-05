@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@types/throttle-debounce": "^2.1.0",
     "axios": "^0.20.0",
     "camelcase-keys": "^6.2.2",
     "core-js": "^3.6.5",
