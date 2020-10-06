@@ -6,25 +6,37 @@
     @input="search"
     ref="locationInput"
   />
+  <ul>
+    <li v-for="city in suggestedCities" :key="city.woeid">{{ city.title }}</li>
+  </ul>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ComponentPublicInstance, PropType } from "vue";
 import { fetchLocation } from "@/api/metaWeather";
+import { debounce } from "throttle-debounce";
+import { Location } from "../../models/Location";
 
 export default defineComponent({
+  data() {
+    return {
+      suggestedCities: [] as PropType<Location[]>
+    };
+  },
   methods: {
-    search(): void {
-      const LocationInput = this.$refs.locationInput as HTMLInputElement;
-      const city = LocationInput.value;
-      // TODO: use throttle
+    search: debounce(1000, function(
+      this: ComponentPublicInstance<{}, {}, { suggestedCities: Location[] }>
+    ): void {
+      const locationInput = this.$refs.locationInput as HTMLInputElement;
+      const city = locationInput.value;
+      if (city === "") {
+        this.suggestedCities = [];
+        return;
+      }
       fetchLocation(city).then(res => {
-        console.log(res.data);
+        this.suggestedCities = res.data;
       });
-    },
-    hoge(test: string) {
-      console.log(test);
-    }
+    })
   }
 });
 </script>
