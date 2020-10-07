@@ -9,7 +9,6 @@
     />
     <BaseLoading v-if="isSearching" class="loading" />
   </div>
-  <!-- <ul v-show="suggestedCities.length" class="suggestions"></ul> -->
 
   <div v-show="suggestedCities.length" class="balloon-top">
     <ul class="suggestions">

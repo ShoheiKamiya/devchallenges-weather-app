@@ -1,5 +1,8 @@
 <template>
   <div class="root">
+    <div v-if="isLoading" class="loading-page">
+      <BaseLoading class="spinner" />
+    </div>
     <template v-if="!isLoading">
       <nav class="nav">
         <WeatherToday
@@ -27,12 +30,14 @@ import { Location } from "../models/Location";
 import { defineComponent } from "vue";
 import WeatherToday from "@/components/WeatherToday.vue";
 import SearchCard from "@/components/SearchCard.vue";
+import BaseLoading from "@/components/BaseLoading.vue";
 
 export default defineComponent({
   components: {
     Main,
     WeatherToday,
-    SearchCard
+    SearchCard,
+    BaseLoading
   },
   data() {
     return {
@@ -65,10 +70,12 @@ export default defineComponent({
     },
     fetchWeather(city: Location): void {
       const woeid = String(city.woeid);
+      this.isLoading = true;
       fetchWeather(woeid).then(res => {
         this.weatherList = res.data.consolidatedWeather;
         this.title = res.data.title;
         this.isLoading = false;
+        this.isSearching = false;
       });
     }
   }
@@ -89,6 +96,18 @@ export default defineComponent({
 
 .root {
   display: flex;
+
+  .loading-page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .spinner {
+      font-size: 30px;
+    }
+  }
 
   .nav {
     width: 459px;
