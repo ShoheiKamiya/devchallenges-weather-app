@@ -9,15 +9,20 @@
     />
     <BaseLoading v-if="isSearching" class="loading" />
   </div>
-  <ul>
-    <li
-      v-for="city in suggestedCities"
-      :key="city.woeid"
-      @click="switchLocation(city)"
-    >
-      {{ city.title }}
-    </li>
-  </ul>
+  <!-- <ul v-show="suggestedCities.length" class="suggestions"></ul> -->
+
+  <div v-show="suggestedCities.length" class="balloon-top">
+    <ul class="suggestions">
+      <li
+        v-for="city in suggestedCities"
+        :key="city.woeid"
+        class="suggested-city"
+        @click="switchLocation(city)"
+      >
+        {{ city.title }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
@@ -85,6 +90,40 @@ export default defineComponent({
     position: absolute;
     top: 13px;
     right: 13px;
+  }
+}
+
+.suggestions {
+  line-height: 47px;
+  max-height: 300px;
+  overflow: scroll;
+  margin-top: 10px;
+
+  .suggested-city {
+    padding: 0 15px;
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+    }
+  }
+}
+
+.balloon-top {
+  position: relative;
+  display: inline-block;
+  width: 268px;
+  margin: 1.5em 0;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.3);
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    margin-left: -15px;
+    border: 10px solid transparent;
+    border-bottom: 10px solid rgba(255, 255, 255, 0.3);
   }
 }
 </style>
