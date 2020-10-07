@@ -1,5 +1,5 @@
 <template>
-  <div class="search">
+  <div class="search-location">
     <input
       class="input"
       type="text"
@@ -57,7 +57,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.search {
+.search-location {
   position: relative;
   width: 268px;
 

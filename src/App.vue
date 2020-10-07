@@ -80,6 +80,7 @@ export default defineComponent({
   .nav {
     width: 459px;
     height: 100vh;
+    padding: 20px 47px;
     background: $color-base;
   }
 
