@@ -8,7 +8,11 @@
           v-show="!isSearching"
           @search="openSearch"
         />
-        <SearchCard v-show="isSearching" @close="this.closeSearch" />
+        <SearchCard
+          v-show="isSearching"
+          @close="this.closeSearch"
+          @switch-location="fetchWeather"
+        />
       </nav>
       <Main class="main" :weatherList="weatherList" />
     </template>
@@ -19,6 +23,7 @@
 import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/metaWeather";
 import { Weather } from "../models/Weather";
+import { Location } from "../models/Location";
 import { defineComponent } from "vue";
 import WeatherToday from "@/components/WeatherToday.vue";
 import SearchCard from "@/components/SearchCard.vue";
@@ -57,6 +62,14 @@ export default defineComponent({
     },
     closeSearch(): void {
       this.isSearching = false;
+    },
+    fetchWeather(city: Location): void {
+      const woeid = String(city.woeid);
+      fetchWeather(woeid).then(res => {
+        this.weatherList = res.data.consolidatedWeather;
+        this.title = res.data.title;
+        this.isLoading = false;
+      });
     }
   }
 });

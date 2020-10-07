@@ -3,13 +3,14 @@
     <button class="close-button" @click="emitClose">
       <span class="material-icons icon clear">clear</span>
     </button>
-    <SearchLocation />
+    <SearchLocation @switch-location="emitSwitchLocation" />
   </div>
 </template>
 
 <script lang="ts">
 import SearchLocation from "@/components/SearchLocation.vue";
 import { defineComponent } from "vue";
+import { Location } from "../../models/Location";
 
 export default defineComponent({
   components: {
@@ -18,6 +19,9 @@ export default defineComponent({
   methods: {
     emitClose(): void {
       this.$emit("close");
+    },
+    emitSwitchLocation(city: Location): void {
+      this.$emit("switch-location", city);
     }
   }
 });

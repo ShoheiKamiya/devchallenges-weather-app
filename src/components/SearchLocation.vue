@@ -10,7 +10,13 @@
     <BaseLoading class="loading" v-if="isSearching" />
   </div>
   <ul>
-    <li v-for="city in suggestedCities" :key="city.woeid">{{ city.title }}</li>
+    <li
+      v-for="city in suggestedCities"
+      :key="city.woeid"
+      @click="switchLocation(city)"
+    >
+      {{ city.title }}
+    </li>
   </ul>
 </template>
 
@@ -51,7 +57,13 @@ export default defineComponent({
         this.suggestedCities = res.data;
         this.isSearching = false;
       });
-    })
+    }),
+    switchLocation(city: Location): void {
+      const locationInput = this.$refs.locationInput as HTMLInputElement;
+      locationInput.value = city.title;
+      this.suggestedCities = [];
+      this.$emit("switch-location", city);
+    }
   }
 });
 </script>
