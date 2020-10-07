@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!isLoading" class="weather_cards">
+    <div class="weather_cards">
       <WeatherCard
         v-for="weather in weatherList5days"
         :key="weather.id"
