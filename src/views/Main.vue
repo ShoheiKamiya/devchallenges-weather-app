@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="weather_cards" v-if="!isLoading">
+    <div v-if="!isLoading" class="weather_cards">
       <WeatherCard
         v-for="weather in weatherList5days"
         :key="weather.id"
@@ -28,16 +28,16 @@ type Wind = {
 };
 
 export default defineComponent({
+  components: {
+    WeatherCard,
+    HightlightCardHumidity,
+    HightlightCardWind
+  },
   props: {
     weatherList: {
       type: Array as PropType<Weather[]>,
       required: true
     }
-  },
-  components: {
-    WeatherCard,
-    HightlightCardHumidity,
-    HightlightCardWind
   },
   computed: {
     weatherList5days(): Weather[] {

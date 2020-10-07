@@ -4,7 +4,7 @@
       <p class="date">
         {{ date }}
       </p>
-      <WeatherCardIcon class="weather_card__icon" :weatherStateAbbr="abbr" />
+      <WeatherCardIcon class="weather_card__icon" :weather-state-abbr="abbr" />
     </div>
     <div class="temp_wrapper">
       <div class="temp_wrapper--max">{{ maxTemp }}℃</div>

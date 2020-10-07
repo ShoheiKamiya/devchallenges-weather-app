@@ -3,18 +3,18 @@
     <template v-if="!isLoading">
       <nav class="nav">
         <WeatherToday
+          v-show="!isSearching"
           :title="title"
           :weather="weatherToday"
-          v-show="!isSearching"
           @search="openSearch"
         />
         <SearchCard
           v-show="isSearching"
-          @close="this.closeSearch"
+          @close="closeSearch"
           @switch-location="fetchWeather"
         />
       </nav>
-      <Main class="main" :weatherList="weatherList" />
+      <Main class="main" :weather-list="weatherList" />
     </template>
   </div>
 </template>
@@ -43,6 +43,11 @@ export default defineComponent({
       // weatherList: data.consolidatedWeather as Weather[]
     };
   },
+  computed: {
+    weatherToday(): Weather {
+      return this.weatherList[0];
+    }
+  },
   mounted() {
     // TODO: いったん固定値(東京)にしておく
     fetchWeather("1118370").then(res => {
@@ -50,11 +55,6 @@ export default defineComponent({
       this.title = res.data.title;
       this.isLoading = false;
     });
-  },
-  computed: {
-    weatherToday(): Weather {
-      return this.weatherList[0];
-    }
   },
   methods: {
     openSearch(): void {

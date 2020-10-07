@@ -1,13 +1,13 @@
 <template>
   <div class="search-location">
     <input
+      ref="locationInput"
       class="input"
       type="text"
       placeholder="search location"
       @input="search"
-      ref="locationInput"
     />
-    <BaseLoading class="loading" v-if="isSearching" />
+    <BaseLoading v-if="isSearching" class="loading" />
   </div>
   <ul>
     <li
@@ -31,6 +31,7 @@ export default defineComponent({
   components: {
     BaseLoading
   },
+  emits: ["switch-location"],
   data() {
     return {
       suggestedCities: [] as PropType<Location[]>,

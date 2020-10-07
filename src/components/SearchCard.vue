@@ -16,6 +16,7 @@ export default defineComponent({
   components: {
     SearchLocation
   },
+  emits: ["close", "switch-location"],
   methods: {
     emitClose(): void {
       this.$emit("close");

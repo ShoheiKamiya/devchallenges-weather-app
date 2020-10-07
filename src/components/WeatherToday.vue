@@ -4,7 +4,7 @@
       <button class="search-button" @click="search">Search for places</button>
       <span class="material-icons my-location-icon">my_location</span>
     </div>
-    <WeatherCardIcon :weatherStateAbbr="abbr" class="weather-icon" />
+    <WeatherCardIcon :weather-state-abbr="abbr" class="weather-icon" />
     <p class="temp">{{ theTemp }}<span class="unit">℃</span></p>
     <p class="weather-state">{{ weather.weatherStateName }}</p>
     <div class="footer">
@@ -41,11 +41,7 @@ export default defineComponent({
       required: true
     }
   },
-  methods: {
-    search() {
-      this.$emit("search");
-    }
-  },
+  emits: ["search"],
   computed: {
     theTemp(): number {
       return Math.round(this.weather.theTemp);
@@ -56,6 +52,11 @@ export default defineComponent({
     today(): string {
       const d = dayjs(this.weather.applicableDate);
       return d.format("ddd, D, MMM");
+    }
+  },
+  methods: {
+    search() {
+      this.$emit("search");
     }
   }
 });
