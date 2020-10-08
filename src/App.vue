@@ -10,6 +10,7 @@
           :title="title"
           :weather="weatherToday"
           @search="openSearch"
+          @click-geo-icon="switchCurrentLocation"
         />
         <SearchCard
           v-show="isSearching"
@@ -25,6 +26,7 @@
 <script lang="ts">
 import Main from "@/views/Main.vue";
 import { fetchWeather } from "@/api/metaWeather";
+import { searchLocation } from "@/api/metaWeather";
 import { Weather } from "../models/Weather";
 import { Location } from "../models/Location";
 import { defineComponent } from "vue";
@@ -76,6 +78,17 @@ export default defineComponent({
         this.title = res.data.title;
         this.isLoading = false;
         this.isSearching = false;
+      });
+    },
+    switchCurrentLocation() {
+      this.isLoading = true;
+      navigator.geolocation.getCurrentPosition(position => {
+        const latt = position.coords.latitude;
+        const long = position.coords.longitude;
+        searchLocation(latt, long).then(res => {
+          const closestCity = res.data[0];
+          this.fetchWeather(closestCity);
+        });
       });
     }
   }

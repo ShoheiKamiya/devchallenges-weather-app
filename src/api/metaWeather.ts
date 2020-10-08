@@ -18,3 +18,9 @@ export const fetchWeather = (woeid: string): AxiosPromise<WetherResponse> =>
 
 export const fetchLocation = (city: string): AxiosPromise<Location[]> =>
   client.get(`/location/search/?query=${city}`);
+
+export const searchLocation = (
+  latt: number,
+  long: number
+): AxiosPromise<Location[]> =>
+  client.get(`/location/search?lattlong=${latt},${long}`);

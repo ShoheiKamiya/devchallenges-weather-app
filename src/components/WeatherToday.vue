@@ -2,7 +2,9 @@
   <div class="weahter-today">
     <div class="header">
       <button class="search-button" @click="search">Search for places</button>
-      <span class="material-icons my-location-icon">my_location</span>
+      <span class="material-icons my-location-icon" @click="emitClickGeoIcon">
+        my_location
+      </span>
     </div>
     <WeatherCardIcon :weather-state-abbr="abbr" class="weather-icon" />
     <p class="temp">{{ theTemp }}<span class="unit">℃</span></p>
@@ -41,7 +43,7 @@ export default defineComponent({
       required: true
     }
   },
-  emits: ["search"],
+  emits: ["search", "click-geo-icon"],
   computed: {
     theTemp(): number {
       return Math.round(this.weather.theTemp);
@@ -57,6 +59,9 @@ export default defineComponent({
   methods: {
     search() {
       this.$emit("search");
+    },
+    emitClickGeoIcon() {
+      this.$emit("click-geo-icon");
     }
   }
 });
@@ -71,15 +76,15 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  > .header {
+  .header {
     display: flex;
     justify-content: space-between;
-    > .search-button {
+    .search-button {
       background: #6e707a;
       padding: 10px 18px;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
-    > .my-location-icon {
+    .my-location-icon {
       font-size: 22px;
       width: 40px;
       height: 40px;
@@ -88,6 +93,10 @@ export default defineComponent({
       text-align: center;
       background: #6e707a;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      &:hover {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.3);
+      }
     }
   }
   > .weather-icon {
