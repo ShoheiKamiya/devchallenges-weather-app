@@ -105,6 +105,7 @@ export default defineComponent({
   background: $color-background;
   font-size: 16px;
   height: 100vh;
+  min-width: 1440px;
 }
 
 .root {
@@ -124,6 +125,7 @@ export default defineComponent({
 
   .nav {
     width: 459px;
+    min-width: 459px;
     height: 100vh;
     padding: 20px 47px;
     background: $color-base;
@@ -132,6 +134,7 @@ export default defineComponent({
   .main {
     height: 100vh;
     width: 100%;
+    min-width: 981px;
     max-width: 981px;
     padding: 42px 123px 50px 154px;
   }
